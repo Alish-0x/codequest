@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning to Code: An Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Sunrise -->
+    <!-- Application Structure Plan: The application is designed as a single-page, vertically scrolling experience with a fixed top navigation for easy access to all sections. The core of the user flow is an interactive quiz in the "Find Your Path" section. This quiz personalizes the content by recommending either the Web Development or Python path, and then dynamically displays the relevant learning details. This structure was chosen to transform the passive, linear guide into an active, engaging journey, empowering the user to make a decision and see a tailored plan immediately, which is more effective for beginners than simply presenting all options at once. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: "Find Your 'Why'" section suggesting paths. -> Goal: Personalize user's journey. -> Viz/Presentation: Interactive Quiz. -> Interaction: User selects a preference, and the page dynamically shows a recommendation. -> Justification: Actively engages the user in their decision-making process, making the advice more impactful. -> Library/Method: Vanilla JS.
+        - Report Info: "Sample 3-Month Roadmaps" for two paths. -> Goal: Compare and organize learning steps. -> Viz/Presentation: Toggleable roadmap cards. -> Interaction: Buttons to switch between Web Dev and Python roadmaps. -> Justification: Prevents information overload by showing one clear path at a time while allowing for easy comparison. -> Library/Method: Vanilla JS.
+        - Report Info: "Learning Method That Actually Works" list. -> Goal: Inform and highlight key principles. -> Viz/Presentation: Icon-driven card grid. -> Interaction: Static display. -> Justification: Breaks up text into easily digestible, visually appealing chunks. -> Library/Method: Tailwind CSS.
+        - Report Info: All other textual content. -> Goal: Inform. -> Viz/Presentation: Structured text blocks. -> Interaction: Static. -> Justification: Provides necessary context and detail in a clean, readable format.
+        - The source report is purely qualitative; therefore, no quantitative data charts (Chart.js, Plotly.js) were necessary or used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-sky-600">CodeQuest</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#mindset" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Mindset</a>
+                        <a href="#path" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Find Your Path</a>
+                        <a href="#method" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Learning Method</a>
+                        <a href="#roadmap" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Roadmaps</a>
+                        <a href="#resources" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+                        <a href="#next-steps" class="text-slate-600 hover:bg-slate-100 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Next Steps</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white">
+            <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+                    Learning to Code: An <span class="text-sky-600">Absolute Beginner's Guide</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
+                    Welcome to the world of programming! This interactive guide provides a clear, step-by-step roadmap to go from knowing nothing to building your first project.
+                </p>
+            </div>
+        </section>
+
+        <section id="mindset" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base text-sky-600 font-semibold tracking-wide uppercase">The Mindset</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        Think Like a Chef, Not a Scientist
+                    </p>
+                    <p class="mt-4 max-w-2xl text-xl text-slate-600 lg:mx-auto">
+                        Before you write a single line of code, let's get into the right mindset. Coding is like learning to cook. You start with a simple recipe, follow the instructions, and learn the process. Your goal isn't to memorize a language; it's to learn how to solve problems logically and creatively.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="path" class="bg-white py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Step 1: Find Your "Why"</h2>
+                <p class="mt-4 text-xl text-slate-600">Your motivation will guide your learning path. Let's find a general direction for you. Which of these sounds more appealing?</p>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <button id="visual-choice" class="p-8 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-left">
+                        <h3 class="text-2xl font-bold text-slate-900">Building & Designing</h3>
+                        <p class="mt-2 text-slate-600">I'm a visual person. I want to build things I can see and interact with, like websites and user interfaces.</p>
+                    </button>
+                    <button id="logic-choice" class="p-8 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-left">
+                        <h3 class="text-2xl font-bold text-slate-900">Logic & Data</h3>
+                        <p class="mt-2 text-slate-600">I enjoy logic, problem-solving, and making things work behind the scenes, like automation or data analysis.</p>
+                    </button>
+                </div>
+                <div id="recommendation-container" class="mt-12"></div>
+            </div>
+        </section>
+        
+        <section id="details" class="py-20 hidden">
+            <div id="details-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            </div>
+        </section>
+
+        <section id="method" class="bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Step 3: The Learning Method That Works</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto">Watching tutorials is passive. Learning to code is an active process. Here are the key principles for success.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">The 20/80 Rule</h3>
+                        <p class="mt-2 text-slate-600">Spend 20% of your time learning a concept and 80% of your time applying it by writing code and building projects.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">Code Every Day</h3>
+                        <p class="mt-2 text-slate-600">Consistency is key. 30 minutes daily is far better than 5 hours once a week. It builds "muscle memory."</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">Build Small Projects</h3>
+                        <p class="mt-2 text-slate-600">As soon as you learn a concept, build something with it, no matter how small. Application solidifies knowledge.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">Embrace Errors</h3>
+                        <p class="mt-2 text-slate-600">Error messages are not failures; they are clues. Learning to read errors and search for solutions is the #1 skill of a developer.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">Avoid "Tutorial Hell"</h3>
+                        <p class="mt-2 text-slate-600">After a tutorial, challenge yourself to build something similar without the guide. This is where true learning happens.</p>
+                    </div>
+                     <div class="p-6 bg-slate-50 rounded-lg">
+                        <h3 class="text-xl font-bold">Choose ONE Path</h3>
+                        <p class="mt-2 text-slate-600">This is the most critical rule. Do not try to learn multiple languages at once. You will get overwhelmed and are more likely to quit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="roadmap" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Sample 3-Month Roadmaps</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto">Here’s a sample plan to guide your first three months. Choose your path to see the details.</p>
+                    <div class="mt-6">
+                        <button id="web-dev-roadmap-btn" class="bg-sky-600 text-white px-6 py-2 rounded-md mr-2">Web Development Path</button>
+                        <button id="python-roadmap-btn" class="bg-white text-slate-700 px-6 py-2 rounded-md border border-slate-300">Python Path</button>
+                    </div>
+                </div>
+                <div id="roadmap-content" class="max-w-4xl mx-auto"></div>
+            </div>
+        </section>
+
+        <section id="resources" class="bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Top YouTube Resources</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto">These channels provide high-quality, beginner-friendly tutorials to supplement your learning.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-center mb-4">General / CS Fundamentals</h3>
+                        <ul class="space-y-3">
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>CS50:</strong> Harvard's excellent introduction to core computer science concepts.</li>
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>freeCodeCamp.org:</strong> The gold standard for full-length, comprehensive courses.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-bold text-center mb-4">For Web Development</h3>
+                        <ul class="space-y-3">
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>SuperSimpleDev:</strong> Perfect for absolute beginners wanting to build real-world website clones.</li>
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>The Net Ninja:</strong> Massive library of well-organized playlists on nearly every web technology.</li>
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>Traversy Media:</strong> Practical, project-based tutorials with a down-to-earth style.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-center mb-4">For Python</h3>
+                        <ul class="space-y-3">
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>Programming with Mosh:</strong> A fantastic, well-structured "Python for Beginners" course.</li>
+                             <li class="p-4 bg-slate-50 rounded-md"><strong>Bro Code:</strong> Provides a very direct, no-fluff 12-hour beginner course.</li>
+                            <li class="p-4 bg-slate-50 rounded-md"><strong>Corey Schafer:</strong> Legendary tutorials for their clarity and depth, great for after the basics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-steps" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">What's Next? Beyond Month 3</h2>
+                    <p class="mt-4 max-w-3xl text-xl text-slate-600 mx-auto">After building a solid foundation, your journey shifts from learning basics to specializing and building more impressive, real-world projects.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-6 text-slate-900">After the Web Development Path</h3>
+                        <div class="space-y-6">
+                            <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Master a JavaScript Framework</h4>
+                                <p class="mt-1 text-slate-600">Dive into a framework like React, Vue, or Angular to build complex, modern user interfaces much more efficiently.</p>
+                            </div>
+                            <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Learn Backend Development</h4>
+                                <p class="mt-1 text-slate-600">Use Node.js with the Express framework to build servers, manage databases, and handle user authentication.</p>
+                            </div>
+                            <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Build Full-Stack Projects</h4>
+                                <p class="mt-1 text-slate-600">Combine your frontend and backend skills to create complete applications from start to finish, like a social media app or an e-commerce store.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-6 text-slate-900">After the Python Path</h3>
+                        <div class="space-y-6">
+                             <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Specialize in a Domain</h4>
+                                <p class="mt-1 text-slate-600">Choose a high-demand field: Data Science (Pandas, Scikit-learn), AI, Backend Web Dev (Django, Flask), or Automation.</p>
+                            </div>
+                             <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Master Object-Oriented Programming</h4>
+                                <p class="mt-1 text-slate-600">Deepen your understanding of OOP concepts to write clean, scalable, and maintainable code for larger, more complex projects.</p>
+                            </div>
+                             <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-lg">Explore Advanced Libraries</h4>
+                                <p class="mt-1 text-slate-600">Dive into the powerful libraries specific to your chosen domain to build sophisticated applications and solve complex problems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-center mb-6 text-slate-900">Universal Next Steps (For Both Paths)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <div class="p-6 bg-slate-800 text-white rounded-lg text-center">
+                            <h4 class="font-bold text-lg">Learn Git & GitHub</h4>
+                            <p class="mt-1 text-slate-300">Master the industry-standard tool for version control to track code changes and collaborate with other developers.</p>
+                        </div>
+                         <div class="p-6 bg-slate-800 text-white rounded-lg text-center">
+                            <h4 class="font-bold text-lg">Build a Portfolio</h4>
+                            <p class="mt-1 text-slate-300">Create a personal website to showcase 2-3 of your best projects. This becomes your resume for job applications.</p>
+                        </div>
+                         <div class="p-6 bg-slate-800 text-white rounded-lg text-center">
+                            <h4 class="font-bold text-lg">Study Data Structures</h4>
+                            <p class="mt-1 text-slate-300">Deepen your problem-solving skills and prepare for technical interviews by learning key data structures and algorithms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold">Your Coding Journey Starts Now</h2>
+            <p class="mt-4 max-w-2xl mx-auto">Learning to code is a marathon, not a sprint. Stay patient, celebrate your progress, and never stop being curious. You can do this!</p>
+        </div>
+    </footer>
+    
+    <script>
+        const visualChoiceBtn = document.getElementById('visual-choice');
+        const logicChoiceBtn = document.getElementById('logic-choice');
+        const recommendationContainer = document.getElementById('recommendation-container');
+        const detailsSection = document.getElementById('details');
+        const detailsContent = document.getElementById('details-content');
+
+        const webDevRoadmapBtn = document.getElementById('web-dev-roadmap-btn');
+        const pythonRoadmapBtn = document.getElementById('python-roadmap-btn');
+        const roadmapContent = document.getElementById('roadmap-content');
+        
+        const pathData = {
+            visual: {
+                title: "Recommended Path: Web Development",
+                description: "This is the perfect starting point for visual creators. You'll learn to build websites and web applications from the ground up, seeing your creations come to life in the browser.",
+                steps: [
+                    { name: "HTML (The Skeleton)", desc: "The structure of a webpage. It's a markup language, not a programming language, and you can learn the basics in a weekend." },
+                    { name: "CSS (The Style)", desc: "This makes a website look good—colors, fonts, and layouts. It works directly with HTML to bring your pages to life." },
+                    { name: "JavaScript (The Brains)", desc: "Your first real programming language. It adds interactivity, making buttons clickable and creating dynamic experiences." }
+                ]
+            },
+            logic: {
+                title: "Recommended Path: Python",
+                description: "Python is famous for its simple, English-like syntax, making it one of the easiest languages to learn. It's the backbone of data science, AI, and task automation.",
+                steps: [
+                    { name: "Core Fundamentals", desc: "You'll start with the basics: variables, data types, loops, if/else statements, and functions." },
+                    { name: "Write Simple Scripts", desc: "Your first projects will be small programs that run in the terminal, like a number guessing game or a simple calculator." },
+                    { name: "Work with Data", desc: "Learn to work with data structures like lists and dictionaries, which are fundamental to any programming." }
+                ]
+            }
+        };
+        
+        const roadmapData = {
+            webDev: `
+                <div class="fade-in space-y-4">
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 1: The Absolute Basics</h4>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li><strong>Weeks 1-2:</strong> Focus on HTML and CSS. Build a simple, static, one-page website.</li>
+                            <li><strong>Weeks 3-4:</strong> Begin learning JavaScript syntax (variables, data types, loops, functions).</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 2: Making Things Interactive</h4>
+                         <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li><strong>Weeks 5-8:</strong> Dive deeper into JavaScript. Learn how to manipulate HTML/CSS (the DOM). Build interactive projects like a rock-paper-scissors game or a simple weather app.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 3: Solidifying Your Skills</h4>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                           <li><strong>Weeks 9-12:</strong> Continue building more complex projects. You could start learning a popular JavaScript library like React once you feel comfortable with the fundamentals.</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            python: `
+                <div class="fade-in space-y-4">
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 1: Core Fundamentals</h4>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li><strong>Weeks 1-4:</strong> Focus entirely on Python syntax. Learn variables, data types, if/else, loops, and functions. Write a dozen small scripts to solve simple problems.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 2: Data Structures & Projects</h4>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li><strong>Weeks 5-8:</strong> Learn Python's core data structures (lists, dictionaries, tuples). Build your first real project, like a command-line contact book or a number guessing game.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border border-slate-200 rounded-lg bg-white">
+                        <h4 class="font-bold text-xl">Month 3: Exploring Libraries</h4>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li><strong>Weeks 9-12:</strong> Learn how to import and use external libraries. Try building a simple web scraper with Requests and Beautiful Soup, or create a basic desktop app with Tkinter.</li>
+                        </ul>
+                    </div>
+                </div>
+            `
+        };
+
+        function showRecommendation(type) {
+            const data = pathData[type];
+            recommendationContainer.innerHTML = `
+                <div class="p-8 bg-sky-50 border border-sky-200 rounded-xl text-center fade-in">
+                    <h3 class="text-2xl font-bold text-sky-700">${data.title}</h3>
+                    <p class="mt-2 text-slate-600">${data.description}</p>
+                </div>
+            `;
+            
+            let stepsHtml = data.steps.map(step => `
+                <div class="p-6 bg-slate-50 rounded-lg">
+                    <h4 class="text-xl font-bold">${step.name}</h4>
+                    <p class="mt-2 text-slate-600">${step.desc}</p>
+                </div>
+            `).join('');
+
+            detailsContent.innerHTML = `
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Step 2: Choose ONE Path and Language</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto">Based on your choice, here are the core technologies you'll focus on. Remember, stick to one path to avoid getting overwhelmed!</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
+                    ${stepsHtml}
+                </div>
+            `;
+
+            detailsSection.classList.remove('hidden');
+            detailsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showRoadmap(type) {
+            roadmapContent.innerHTML = roadmapData[type];
+            if (type === 'webDev') {
+                webDevRoadmapBtn.classList.add('bg-sky-600', 'text-white');
+                webDevRoadmapBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300');
+                pythonRoadmapBtn.classList.remove('bg-sky-600', 'text-white');
+                pythonRoadmapBtn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300');
+            } else {
+                pythonRoadmapBtn.classList.add('bg-sky-600', 'text-white');
+                pythonRoadmapBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300');
+                webDevRoadmapBtn.classList.remove('bg-sky-600', 'text-white');
+                webDevRoadmapBtn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300');
+            }
+        }
+        
+        visualChoiceBtn.addEventListener('click', () => showRecommendation('visual'));
+        logicChoiceBtn.addEventListener('click', () => showRecommendation('logic'));
+        
+        webDevRoadmapBtn.addEventListener('click', () => showRoadmap('webDev'));
+        pythonRoadmapBtn.addEventListener('click', () => showRoadmap('python'));
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            showRoadmap('webDev');
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+
